@@ -1,0 +1,31 @@
+                      User
+                        │
+        ┌───────────────┴───────────────┐
+        │                               │
+        ▼                               ▼
+    Upload BRD                  Enter Website URL
+        │                               │
+        └───────────────┬───────────────┘
+                        │
+                        ▼
+             AI Orchestrator (Python)
+                        │
+    ┌───────────────────┼────────────────────┐
+    ▼                   ▼                    ▼
+BRD Agent         Website Explorer      Test Planner
+(DeepSeek)        (Playwright)          (DeepSeek)
+    │                   │                    │
+    │                   ▼                    │
+    │          DOM + Screenshots + APIs      │
+    │                   │                    │
+    └───────────────────┼────────────────────┘
+                        ▼
+            AI Requirement Mapping
+                        ▼
+          Playwright Test Generator
+                        ▼
+           Playwright Test Execution
+                        ▼
+         AI Failure Analysis (DeepSeek)
+                        ▼
+          Excel + HTML + PDF Report
