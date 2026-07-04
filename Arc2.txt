@@ -1,0 +1,95 @@
+                                           USER
+                                             │
+                    ┌────────────────────────┼────────────────────────┐
+                    │                        │                        │
+                    ▼                        ▼                        ▼
+              Upload BRD              Website URL              Test Configuration
+             (PDF/DOCX/XLSX)     (https://demo.app.com)     Browser, Env, Credentials
+                    │
+                    └────────────────────────┬────────────────────────┘
+                                             │
+                                             ▼
+                               FastAPI Backend (Python)
+                                             │
+                                             ▼
+                              LangGraph Orchestrator
+                                             │
+========================================================================================
+                                        Shared State
+========================================================================================
+BRD
+Requirements
+Website
+Pages
+DOM
+APIs
+Test Cases
+Playwright Scripts
+Execution Results
+Logs
+Screenshots
+Videos
+Traces
+AI Analysis
+Reports
+========================================================================================
+                                             │
+                                             ▼
+                                      Initialize Node
+                                             │
+                                             ▼
+                                 Parse BRD Document Node
+                                             │
+                                             ▼
+                          Requirement Extraction Agent (DeepSeek)
+                                             │
+                                             ▼
+                               Website Explorer Agent (Playwright)
+                                             │
+                          Crawl Entire Website / Build Site Map
+                                             │
+         ┌──────────────────────────────┬──────────────────────────────┐
+         ▼                              ▼                              ▼
+ DOM Extraction Agent           API Discovery Agent           Screenshot Agent
+         │                              │                              │
+         └──────────────────────────────┴──────────────────────────────┘
+                                             │
+                                             ▼
+                          Requirement Mapping Agent (AI)
+                                             │
+                                             ▼
+                          Test Case Generation Agent (AI)
+                                             │
+                                             ▼
+                    Playwright Script Generation Agent (AI)
+                                             │
+                                             ▼
+                     Playwright Execution Agent (Python)
+                                             │
+                    Collect Logs / Screenshots / Videos / Traces
+                                             │
+                              Were all tests successful?
+                                  ┌──────────┴──────────┐
+                                  │                     │
+                                 YES                   NO
+                                  │                     │
+                                  ▼                     ▼
+                        Coverage Analysis       Failure Analysis Agent
+                                                      │
+                                  ┌───────────────────┼────────────────────┐
+                                  ▼                   ▼                    ▼
+                          Root Cause AI        Severity Analysis     Recommendation AI
+                                  │                   │                    │
+                                  └───────────────────┴────────────────────┘
+                                                      │
+                                                      ▼
+                                        Report Aggregation Agent
+                                                      │
+               ┌──────────────────────────────────────┼─────────────────────────────────────────┐
+               ▼                                      ▼                                         ▼
+        Excel Report                         HTML Dashboard                              PDF Report
+               │                                      │                                         │
+               └──────────────────────────────────────┴─────────────────────────────────────────┘
+                                                      │
+                                                      ▼
+                                               Final Delivery
