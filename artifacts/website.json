@@ -1,0 +1,52 @@
+{
+    "title": "OrangeHRM",
+    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+    "buttons": [
+        {
+            "text": "Login",
+            "visible": true
+        }
+    ],
+    "inputs": [
+        {
+            "type": "hidden",
+            "name": "_token",
+            "placeholder": null
+        },
+        {
+            "type": null,
+            "name": "username",
+            "placeholder": "Username"
+        },
+        {
+            "type": "password",
+            "name": "password",
+            "placeholder": "Password"
+        }
+    ],
+    "links": [
+        {
+            "text": "",
+            "href": "https://www.linkedin.com/company/orangehrm/mycompany/"
+        },
+        {
+            "text": "",
+            "href": "https://www.facebook.com/OrangeHRM/"
+        },
+        {
+            "text": "",
+            "href": "https://twitter.com/orangehrm?lang=en"
+        },
+        {
+            "text": "",
+            "href": "https://www.youtube.com/c/OrangeHRMInc"
+        },
+        {
+            "text": "OrangeHRM, Inc",
+            "href": "http://www.orangehrm.com"
+        }
+    ],
+    "dropdowns": 0,
+    "tables": 0,
+    "forms": 1
+}

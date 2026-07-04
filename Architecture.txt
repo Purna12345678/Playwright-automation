@@ -1,3 +1,33 @@
+                          User
+                           │
+            ┌──────────────┴──────────────┐
+            ▼                             ▼
+      Upload BRD                  Website URL
+            │                             │
+            └──────────────┬──────────────┘
+                           ▼
+                  LangGraph Orchestrator
+                           │
+    ┌──────────────────────┼──────────────────────┐
+    ▼                      ▼                      ▼
+BRD Agent          Website Agent          Mapping Agent
+                           │
+                           ▼
+                 Test Generation Agent
+                           │
+                           ▼
+                 Playwright Execution
+                           │
+                           ▼
+                Failure Analysis Agent
+                           │
+                           ▼
+                  Excel Report Generator
+
+
+
+                  
+ 
                       User
                         │
         ┌───────────────┴───────────────┐
@@ -29,3 +59,71 @@ BRD Agent         Website Explorer      Test Planner
          AI Failure Analysis (DeepSeek)
                         ▼
           Excel + HTML + PDF Report
+
+
+
+
+ai-qa-platform/
+
+├── app.py
+├── requirements.txt
+├── .env
+│
+├── graph/
+│   ├── graph.py
+│   ├── state.py
+│   ├── router.py
+│   ├── nodes.py
+│   └── edges.py
+│
+├── agents/
+│   ├── orchestrator.py
+│   ├── brd_agent.py
+│   ├── requirement_agent.py
+│   ├── website_agent.py
+│   ├── dom_agent.py
+│   ├── api_agent.py
+│   ├── mapping_agent.py
+│   ├── testcase_agent.py
+│   ├── playwright_agent.py
+│   ├── execution_agent.py
+│   ├── failure_agent.py
+│   ├── coverage_agent.py
+│   └── report_agent.py
+│
+├── parser/
+│   ├── pdf_parser.py
+│   ├── docx_parser.py
+│   └── excel_parser.py
+│
+├── playwright/
+│   ├── pages/
+│   ├── fixtures/
+│   ├── tests/
+│   ├── generated/
+│   └── utils/
+│
+├── reports/
+│   ├── excel/
+│   ├── html/
+│   ├── pdf/
+│   └── json/
+│
+├── artifacts/
+│   ├── screenshots/
+│   ├── videos/
+│   ├── traces/
+│   ├── console/
+│   └── network/
+│
+├── prompts/
+│   ├── requirement_prompt.txt
+│   ├── testcase_prompt.txt
+│   ├── analysis_prompt.txt
+│   └── report_prompt.txt
+│
+├── templates/
+│
+├── config/
+│
+└── utils/
