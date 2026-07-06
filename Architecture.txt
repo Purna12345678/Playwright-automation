@@ -1,3 +1,56 @@
+                  User
+                    │
+                    ▼
+               app.py (Entry)
+                    │
+                    ▼
+            LangGraph Workflow
+                    │
+ ┌──────────────────┼──────────────────┐
+ ▼                  ▼                  ▼
+BRD Agent      Website Agent      Memory
+    │               │                 │
+    ▼               ▼                 ▼
+requirements.json website.json   Graph State
+         │             │
+         └──────┬──────┘
+                ▼
+        Mapping Agent (Gemini)
+                │
+                ▼
+         mapping.json
+                │
+                ▼
+      Test Generator Agent
+                │
+                ▼
+     tests/generated_tests.py
+                │
+                ▼
+      Playwright Execution
+                │
+        ┌───────┴────────┐
+        ▼                ▼
+    Pass Result     Fail Result
+        │                │
+        └───────┬────────┘
+                ▼
+      Failure Analysis Agent
+                │
+                ▼
+        report_data.json
+                │
+                ▼
+      Excel Report Generator
+
+
+
+
+
+
+      
+       
+ 
                           User
                            │
             ┌──────────────┴──────────────┐
@@ -23,6 +76,7 @@ BRD Agent          Website Agent          Mapping Agent
                            │
                            ▼
                   Excel Report Generator
+
 
 
 

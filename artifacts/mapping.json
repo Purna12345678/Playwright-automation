@@ -1,0 +1,64 @@
+{
+    "Modules": {
+        "Login Module": {
+            "exists": true,
+            "locator": "url: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login, form (encompasses login functionality)"
+        }
+    },
+    "Features": {
+        "User Login": {
+            "exists": true,
+            "locator": "form, buttons[text='Login']"
+        },
+        "Username Input": {
+            "exists": true,
+            "locator": "inputs[name='username']"
+        },
+        "Password Input": {
+            "exists": true,
+            "locator": "inputs[name='password']"
+        },
+        "User Authentication": {
+            "exists": true,
+            "locator": "buttons[text='Login'] (triggers authentication process)"
+        },
+        "Invalid Credential Error Display": {
+            "exists": true,
+            "locator": "dynamic error message element (expected to appear on the page after invalid login attempt; not present in initial DOM structure)"
+        }
+    },
+    "Functional Requirements": {
+        "The system shall allow the user to enter a username.": {
+            "exists": true,
+            "locator": "inputs[name='username']"
+        },
+        "The system shall allow the user to enter a password.": {
+            "exists": true,
+            "locator": "inputs[name='password']"
+        },
+        "The system shall authenticate the user when the Login button is clicked.": {
+            "exists": true,
+            "locator": "buttons[text='Login'], form"
+        },
+        "The system shall display an error message for invalid credentials.": {
+            "exists": true,
+            "locator": "dynamic error message element (expected to appear on the page after invalid login attempt; not present in initial DOM structure)"
+        }
+    },
+    "Validation Rules": {
+        "Credentials (username and password) must be valid for successful user authentication.": {
+            "exists": true,
+            "locator": "inputs[name='username'], inputs[name='password'], buttons[text='Login'] (rule applied during form submission)"
+        }
+    },
+    "Acceptance Criteria": {
+        "Given the user is on the Login page, when a valid username and password are entered, and the 'Login' button is clicked, then the user should be successfully authenticated.": {
+            "exists": true,
+            "locator": "url, inputs[name='username'], inputs[name='password'], buttons[text='Login']"
+        },
+        "Given the user is on the Login page, when an invalid username or password is entered, and the 'Login' button is clicked, then an error message for invalid credentials should be displayed.": {
+            "exists": true,
+            "locator": "url, inputs[name='username'], inputs[name='password'], buttons[text='Login'], dynamic error message element"
+        }
+    }
+}
