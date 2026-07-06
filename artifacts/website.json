@@ -1,52 +1,147 @@
 {
-    "title": "OrangeHRM",
-    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
-    "buttons": [
-        {
-            "text": "Login",
-            "visible": true
+    "page": {
+        "title": "OrangeHRM",
+        "url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+        "viewport": {
+            "width": 1280,
+            "height": 720
         }
-    ],
-    "inputs": [
+    },
+    "elements": [
         {
+            "tag": "input",
             "type": "hidden",
+            "id": "",
             "name": "_token",
-            "placeholder": null
+            "class": "",
+            "placeholder": "",
+            "text": "",
+            "role": null,
+            "href": "",
+            "locator": "input[name=\"_token\"]",
+            "visible": false,
+            "enabled": true
         },
         {
-            "type": null,
+            "tag": "input",
+            "type": "text",
+            "id": "",
             "name": "username",
-            "placeholder": "Username"
+            "class": "oxd-input oxd-input--focus",
+            "placeholder": "Username",
+            "text": "",
+            "role": null,
+            "href": "",
+            "locator": "input[name=\"username\"]",
+            "visible": true,
+            "enabled": true
         },
         {
+            "tag": "input",
             "type": "password",
+            "id": "",
             "name": "password",
-            "placeholder": "Password"
-        }
-    ],
-    "links": [
-        {
+            "class": "oxd-input oxd-input--active",
+            "placeholder": "Password",
             "text": "",
-            "href": "https://www.linkedin.com/company/orangehrm/mycompany/"
+            "role": null,
+            "href": "",
+            "locator": "input[name=\"password\"]",
+            "visible": true,
+            "enabled": true
         },
         {
-            "text": "",
-            "href": "https://www.facebook.com/OrangeHRM/"
+            "tag": "button",
+            "type": "submit",
+            "id": "",
+            "name": "",
+            "class": "oxd-button oxd-button--medium oxd-button--main orangehrm-login-button",
+            "placeholder": "",
+            "text": "Login",
+            "role": null,
+            "href": "",
+            "locator": "button[type=\"submit\"]",
+            "visible": true,
+            "enabled": true
         },
         {
+            "tag": "a",
+            "type": "",
+            "id": "",
+            "name": "",
+            "class": "",
+            "placeholder": "",
             "text": "",
-            "href": "https://twitter.com/orangehrm?lang=en"
+            "role": null,
+            "href": "https://www.linkedin.com/company/orangehrm/mycompany/",
+            "locator": "a",
+            "visible": true,
+            "enabled": true
         },
         {
+            "tag": "a",
+            "type": "",
+            "id": "",
+            "name": "",
+            "class": "",
+            "placeholder": "",
             "text": "",
-            "href": "https://www.youtube.com/c/OrangeHRMInc"
+            "role": null,
+            "href": "https://www.facebook.com/OrangeHRM/",
+            "locator": "a",
+            "visible": true,
+            "enabled": true
         },
         {
+            "tag": "a",
+            "type": "",
+            "id": "",
+            "name": "",
+            "class": "",
+            "placeholder": "",
+            "text": "",
+            "role": null,
+            "href": "https://twitter.com/orangehrm?lang=en",
+            "locator": "a",
+            "visible": true,
+            "enabled": true
+        },
+        {
+            "tag": "a",
+            "type": "",
+            "id": "",
+            "name": "",
+            "class": "",
+            "placeholder": "",
+            "text": "",
+            "role": null,
+            "href": "https://www.youtube.com/c/OrangeHRMInc",
+            "locator": "a",
+            "visible": true,
+            "enabled": true
+        },
+        {
+            "tag": "a",
+            "type": "",
+            "id": "",
+            "name": "",
+            "class": "",
+            "placeholder": "",
             "text": "OrangeHRM, Inc",
-            "href": "http://www.orangehrm.com"
+            "role": null,
+            "href": "http://www.orangehrm.com/",
+            "locator": "a",
+            "visible": true,
+            "enabled": true
         }
     ],
-    "dropdowns": 0,
-    "tables": 0,
-    "forms": 1
+    "statistics": {
+        "buttons": 1,
+        "inputs": 3,
+        "links": 5,
+        "dropdowns": 0,
+        "tables": 0,
+        "forms": 1,
+        "textareas": 0
+    }
 }

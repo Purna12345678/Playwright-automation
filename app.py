@@ -1,15 +1,30 @@
-from agents.website_agent import WebsiteExplorerAgent
-from utils.json_utils import save_json
+from graph.workflow import graph
 
-url = input("Website URL : ")
+state = {
 
-agent = WebsiteExplorerAgent()
+    "url":
+    input("Website URL : "),
 
-website = agent.explore(url)
+    "brd_path":
+    input("BRD PDF : "),
 
-save_json(
-    website,
-    "artifacts/website.json"
-)
+    "brd_text":"",
 
-print("Website saved.")
+    "website":{},
+
+    "requirements":{},
+
+    "mapping":{},
+
+    "generated_tests":[],
+
+    "execution_results":[],
+
+    "failures":[],
+
+    "report_path":""
+}
+
+result = graph.invoke(state)
+
+print(result)

@@ -1,107 +1,230 @@
 import json
+import os
 
 from utils.browser import BrowserManager
 
 
 class WebsiteExplorerAgent:
 
+    def __init__(self):
+        self.browser = None
+        self.page = None
+
     def explore(self, url):
 
-        browser = BrowserManager()
+        self.browser = BrowserManager()
+        self.page = self.browser.start()
 
-        page = browser.start()
+        self.page.goto(url)
+        self.page.wait_for_load_state("networkidle")
 
-        page.goto(url)
-
-        page.wait_for_load_state("networkidle")
-
-        title = page.title()
-
-        screenshot = "screenshots/home.png"
-
-        page.screenshot(path=screenshot)
+        os.makedirs("artifacts", exist_ok=True)
+        os.makedirs("screenshots", exist_ok=True)
 
         data = {
-            "title": title,
-            "url": page.url,
-            "buttons": [],
-            "inputs": [],
-            "links": [],
-            "dropdowns": [],
-            "tables": [],
-            "forms": []
+            "page": self.capture_page_info(),
+            "elements": self.capture_elements(),
+            "statistics": self.capture_statistics()
         }
 
-        # Buttons
+        self.capture_screenshot()
+        self.save_dom()
 
-        buttons = page.locator("button").all()
+        try:
+            self.save_accessibility()
+        except Exception:
+            print("Accessibility snapshot not supported.")
 
-        for button in buttons:
+        self.save_json(data)
 
-            try:
-
-                data["buttons"].append({
-                    "text": button.inner_text(),
-                    "visible": button.is_visible()
-                })
-
-            except:
-
-                pass
-
-        # Inputs
-
-        inputs = page.locator("input").all()
-
-        for textbox in inputs:
-
-            try:
-
-                data["inputs"].append({
-                    "type": textbox.get_attribute("type"),
-                    "name": textbox.get_attribute("name"),
-                    "placeholder": textbox.get_attribute("placeholder")
-                })
-
-            except:
-
-                pass
-
-        # Links
-
-        links = page.locator("a").all()
-
-        for link in links:
-
-            try:
-
-                data["links"].append({
-                    "text": link.inner_text(),
-                    "href": link.get_attribute("href")
-                })
-
-            except:
-
-                pass
-
-        # Forms
-
-        forms = page.locator("form").count()
-
-        data["forms"] = forms
-
-        # Tables
-
-        data["tables"] = page.locator("table").count()
-
-        # Dropdowns
-
-        data["dropdowns"] = page.locator("select").count()
-
-        with open("artifacts/website.json", "w", encoding="utf-8") as f:
-
-            json.dump(data, f, indent=4)
-
-        browser.stop()
+        self.browser.stop()
 
         return data
+
+    # --------------------------------------------------------
+    # Page Information
+    # --------------------------------------------------------
+
+    def capture_page_info(self):
+
+        viewport = self.page.viewport_size
+
+        return {
+            "title": self.page.title(),
+            "url": self.page.url,
+            "viewport": viewport
+            if viewport
+            else {
+                "width": 1280,
+                "height": 720
+            }
+        }
+
+    # --------------------------------------------------------
+    # Capture every important element
+    # --------------------------------------------------------
+
+    def capture_elements(self):
+
+        js = """
+        () => {
+
+            const result = [];
+
+            const elements = document.querySelectorAll(
+                "input,button,select,textarea,a"
+            );
+
+            elements.forEach(el=>{
+
+                let locator="";
+
+                if(el.name){
+
+                    locator=`${el.tagName.toLowerCase()}[name="${el.name}"]`;
+
+                }
+
+                else if(el.id){
+
+                    locator=`#${el.id}`;
+
+                }
+
+                else if(el.type){
+
+                    locator=`${el.tagName.toLowerCase()}[type="${el.type}"]`;
+
+                }
+
+                else{
+
+                    locator=el.tagName.toLowerCase();
+
+                }
+
+                result.push({
+
+                    tag:el.tagName.toLowerCase(),
+
+                    type:el.type || "",
+
+                    id:el.id || "",
+
+                    name:el.name || "",
+
+                    class:el.className || "",
+
+                    placeholder:el.placeholder || "",
+
+                    text:el.innerText || "",
+
+                    role:el.getAttribute("role"),
+
+                    href:el.href || "",
+
+                    locator:locator,
+
+                    visible:el.offsetParent!==null,
+
+                    enabled:!el.disabled
+
+                });
+
+            });
+
+            return result;
+
+        }
+        """
+
+        return self.page.evaluate(js)
+
+    # --------------------------------------------------------
+    # Counts
+    # --------------------------------------------------------
+
+    def capture_statistics(self):
+
+        return {
+
+            "buttons": self.page.locator("button").count(),
+
+            "inputs": self.page.locator("input").count(),
+
+            "links": self.page.locator("a").count(),
+
+            "dropdowns": self.page.locator("select").count(),
+
+            "tables": self.page.locator("table").count(),
+
+            "forms": self.page.locator("form").count(),
+
+            "textareas": self.page.locator("textarea").count()
+
+        }
+
+    # --------------------------------------------------------
+    # Screenshot
+    # --------------------------------------------------------
+
+    def capture_screenshot(self):
+
+        self.page.screenshot(
+            path="artifacts/homepage.png",
+            full_page=True
+        )
+
+    # --------------------------------------------------------
+    # Save HTML
+    # --------------------------------------------------------
+
+    def save_dom(self):
+
+        html = self.page.content()
+
+        with open(
+            "artifacts/dom.html",
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            f.write(html)
+
+    # --------------------------------------------------------
+    # Accessibility
+    # --------------------------------------------------------
+
+    def save_accessibility(self):
+
+        snapshot = self.page.accessibility.snapshot()
+
+        with open(
+            "artifacts/accessibility.json",
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            json.dump(
+                snapshot,
+                f,
+                indent=4
+            )
+
+    # --------------------------------------------------------
+    # Save Website JSON
+    # --------------------------------------------------------
+
+    def save_json(self, data):
+
+        with open(
+            "artifacts/website.json",
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            json.dump(
+                data,
+                f,
+                indent=4
+            )
